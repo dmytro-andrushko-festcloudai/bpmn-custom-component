@@ -1,5 +1,6 @@
 import BpmnModeler from "bpmn-js/lib/Modeler";
 import diagramXML from '../resources/diagram.bpmn';
+import customModule from './customElement';
 
 import "bpmn-js/dist/assets/diagram-js.css";
 import "bpmn-js/dist/assets/bpmn-js.css";
@@ -13,6 +14,9 @@ const containerEl = document.getElementById("root");
 // create modeler
 const bpmnModeler = new BpmnModeler({
   container: containerEl,
+  additionalModules: [
+    customModule
+  ],
 });
 
 // import XML
