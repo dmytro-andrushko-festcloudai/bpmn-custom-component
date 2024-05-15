@@ -3,6 +3,7 @@ import {
   BpmnPropertiesPanelModule,
   BpmnPropertiesProviderModule,
 } from "bpmn-js-properties-panel";
+import minimapModule from 'diagram-js-minimap';
 import diagramXML from "../resources/diagram.bpmn";
 import customModule from "./customElement";
 import magicPropertiesProviderModule from "./customProperty";
@@ -14,6 +15,7 @@ import "bpmn-js/dist/assets/diagram-js.css";
 import "bpmn-js/dist/assets/bpmn-js.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 import "@bpmn-io/properties-panel/assets/properties-panel.css";
+import 'diagram-js-minimap/assets/diagram-js-minimap.css';
 
 // custom styles
 import "./assets/style/main.scss";
@@ -24,6 +26,7 @@ const bpmnModeler = new BpmnModeler({
   additionalModules: [
     customModule,
     BpmnPropertiesPanelModule,
+    minimapModule,
     BpmnPropertiesProviderModule,
     magicPropertiesProviderModule,
   ],

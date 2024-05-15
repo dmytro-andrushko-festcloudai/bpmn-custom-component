@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "bpmn-js": "^17.6.4",
-    "bpmn-js-properties-panel": "^5.16.0"
+    "bpmn-js-properties-panel": "^5.16.0",
+    "diagram-js-minimap": "^4.1.0"
   }
 }
