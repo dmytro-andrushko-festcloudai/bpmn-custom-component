@@ -6,12 +6,16 @@ import {
 import diagramXML from "../resources/diagram.bpmn";
 import customModule from "./customElement";
 
+import magicPropertiesProviderModule from './customProperty';
+import magicModdleDescriptor from './customProperty/descriptors/magic.json';
+
+// bpmn library styles
 import "bpmn-js/dist/assets/diagram-js.css";
 import "bpmn-js/dist/assets/bpmn-js.css";
-
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 import "@bpmn-io/properties-panel/assets/properties-panel.css";
 
+// custom styles
 import "./assets/style/main.scss";
 
 // create modeler
@@ -21,7 +25,11 @@ const bpmnModeler = new BpmnModeler({
     customModule,
     BpmnPropertiesPanelModule,
     BpmnPropertiesProviderModule,
+    magicPropertiesProviderModule
   ],
+  moddleExtensions: {
+    magic: magicModdleDescriptor
+  },
   propertiesPanel: {
     parent: "#properties",
   },
