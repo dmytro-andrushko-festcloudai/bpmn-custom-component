@@ -34,6 +34,7 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "bpmn-js": "^17.6.4"
+    "bpmn-js": "^17.6.4",
+    "bpmn-js-properties-panel": "^5.16.0"
   }
 }

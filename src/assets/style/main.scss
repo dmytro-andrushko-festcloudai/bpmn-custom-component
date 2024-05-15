@@ -15,6 +15,19 @@ html {
 
 html,
 body,
-#root {
+.modeler {
   height: 100%;
+}
+
+.modeler {
+  display: flex;
+}
+
+.canvas {
+  flex: 1 0 0;
+}
+
+.properties {
+  flex: 0 0 500px;
+  border-left: 1px solid gray;
 }
