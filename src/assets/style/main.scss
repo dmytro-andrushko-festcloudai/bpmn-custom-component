@@ -1,0 +1,20 @@
+$font-size: 1rem;
+$font-color: lch(53 105 40);
+
+html {
+  font-size: $font-size;
+  color: $font-color;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  outline: none;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
