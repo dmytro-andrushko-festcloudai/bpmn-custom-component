@@ -5,9 +5,9 @@ import {
 } from "bpmn-js-properties-panel";
 import diagramXML from "../resources/diagram.bpmn";
 import customModule from "./customElement";
-
-import magicPropertiesProviderModule from './customProperty';
-import magicModdleDescriptor from './customProperty/descriptors/magic.json';
+import magicPropertiesProviderModule from "./customProperty";
+import magicModdleDescriptor from "./customProperty/descriptors/magic.json";
+import { exportSVG, exportXML } from "./utils";
 
 // bpmn library styles
 import "bpmn-js/dist/assets/diagram-js.css";
@@ -25,10 +25,10 @@ const bpmnModeler = new BpmnModeler({
     customModule,
     BpmnPropertiesPanelModule,
     BpmnPropertiesProviderModule,
-    magicPropertiesProviderModule
+    magicPropertiesProviderModule,
   ],
   moddleExtensions: {
-    magic: magicModdleDescriptor
+    magic: magicModdleDescriptor,
   },
   propertiesPanel: {
     parent: "#properties",
@@ -37,3 +37,11 @@ const bpmnModeler = new BpmnModeler({
 
 // import XML
 bpmnModeler.importXML(diagramXML).then(() => {});
+
+// wire save button
+document
+  .getElementById("save-svg")
+  .addEventListener("click", () => exportSVG(bpmnModeler));
+document
+  .getElementById("save-xml")
+  .addEventListener("click", () => exportXML(bpmnModeler));
