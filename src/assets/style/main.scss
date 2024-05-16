@@ -53,3 +53,23 @@ body,
   flex: 0 0 400px;
   border-left: 1px solid gray;
 }
+
+.bpmn-icon-task.red {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    display: none;
+  }
+
+  img {
+    height: 26px;
+    width: 26px;
+  }
+
+  &:hover img {
+    outline: 1px solid hsl(205, 100%, 45%);
+    border-radius: 4px;
+  }
+}

@@ -1,3 +1,5 @@
+import svgIcon from '../assets/images/graphql.svg';
+
 const SUITABILITY_SCORE_HIGH = 150,
       SUITABILITY_SCORE_AVERGE = 50,
       SUITABILITY_SCORE_LOW = 25;
@@ -40,6 +42,7 @@ export default class CustomPalette {
         group: 'activity',
         className: 'bpmn-icon-task red',
         title: translate('Create Task with low suitability score'),
+        imageUrl:svgIcon,
         action: {
           dragstart: createTask(SUITABILITY_SCORE_LOW),
           click: createTask(SUITABILITY_SCORE_LOW)
