@@ -1,8 +1,6 @@
-import svgIcon from '../assets/images/graphql.svg';
+import svgIcon from "../assets/images/graphql.svg";
 
-const SUITABILITY_SCORE_HIGH = 150,
-      SUITABILITY_SCORE_AVERGE = 50,
-      SUITABILITY_SCORE_LOW = 25;
+const SUITABILITY_SCORE_LOW = "GraphQl";
 
 export default class CustomPalette {
   constructor(bpmnFactory, create, elementFactory, palette, translate) {
@@ -15,22 +13,17 @@ export default class CustomPalette {
   }
 
   getPaletteEntries(element) {
-    const {
-      bpmnFactory,
-      create,
-      elementFactory,
-      translate
-    } = this;
+    const { bpmnFactory, create, elementFactory, translate } = this;
 
     function createTask(suitabilityScore) {
-      return function(event) {
-        const businessObject = bpmnFactory.create('bpmn:Task');
+      return function (event) {
+        const businessObject = bpmnFactory.create("bpmn:ServiceTask");
 
         businessObject.suitable = suitabilityScore;
 
         const shape = elementFactory.createShape({
-          type: 'bpmn:Task',
-          businessObject: businessObject
+          type: "bpmn:ServiceTask",
+          businessObject: businessObject,
         });
 
         create.start(event, shape);
@@ -38,42 +31,24 @@ export default class CustomPalette {
     }
 
     return {
-      'create.low-task': {
-        group: 'activity',
-        className: 'bpmn-icon-task red',
-        title: translate('Create Task with low suitability score'),
-        imageUrl:svgIcon,
+      "create.low-task": {
+        group: "activity",
+        className: "bpmn-icon-task red",
+        title: translate("Create Service Task with GraphQl params"),
+        imageUrl: svgIcon,
         action: {
           dragstart: createTask(SUITABILITY_SCORE_LOW),
-          click: createTask(SUITABILITY_SCORE_LOW)
-        }
+          click: createTask(SUITABILITY_SCORE_LOW),
+        },
       },
-      'create.average-task': {
-        group: 'activity',
-        className: 'bpmn-icon-task yellow',
-        title: translate('Create Task with average suitability score'),
-        action: {
-          dragstart: createTask(SUITABILITY_SCORE_AVERGE),
-          click: createTask(SUITABILITY_SCORE_AVERGE)
-        }
-      },
-      'create.high-task': {
-        group: 'activity',
-        className: 'bpmn-icon-task green',
-        title: translate('Create Task with high suitability score'),
-        action: {
-          dragstart: createTask(SUITABILITY_SCORE_HIGH),
-          click: createTask(SUITABILITY_SCORE_HIGH)
-        }
-      }
     };
   }
 }
 
 CustomPalette.$inject = [
-  'bpmnFactory',
-  'create',
-  'elementFactory',
-  'palette',
-  'translate'
+  "bpmnFactory",
+  "create",
+  "elementFactory",
+  "palette",
+  "translate",
 ];

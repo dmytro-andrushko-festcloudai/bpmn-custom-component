@@ -1,29 +1,23 @@
-import BaseRenderer from 'diagram-js/lib/draw/BaseRenderer';
+import BaseRenderer from "diagram-js/lib/draw/BaseRenderer";
 
 import {
   append as svgAppend,
   attr as svgAttr,
   classes as svgClasses,
-  create as svgCreate
-} from 'tiny-svg';
+  create as svgCreate,
+} from "tiny-svg";
 
-import {
-  getRoundRectPath
-} from 'bpmn-js/lib/draw/BpmnRenderUtil';
+import { getRoundRectPath } from "bpmn-js/lib/draw/BpmnRenderUtil";
 
-import {
-  is,
-  getBusinessObject
-} from 'bpmn-js/lib/util/ModelUtil';
+import { is, getBusinessObject } from "bpmn-js/lib/util/ModelUtil";
 
-import { isNil } from 'min-dash';
+import { isNil } from "min-dash";
 
 const HIGH_PRIORITY = 1500,
-      TASK_BORDER_RADIUS = 2,
-      COLOR_GREEN = '#52B415',
-      COLOR_YELLOW = '#ffc800',
-      COLOR_RED = '#cc0000';
-
+  TASK_BORDER_RADIUS = 2,
+  COLOR_GREEN = "#52B415",
+  COLOR_YELLOW = "#ffc800",
+  COLOR_RED = "#cc0000";
 
 export default class CustomRenderer extends BaseRenderer {
   constructor(eventBus, bpmnRenderer) {
@@ -33,7 +27,6 @@ export default class CustomRenderer extends BaseRenderer {
   }
 
   canRender(element) {
-
     // ignore labels
     return !element.labelTarget;
   }
@@ -46,20 +39,20 @@ export default class CustomRenderer extends BaseRenderer {
     if (!isNil(suitabilityScore)) {
       const color = this.getColor(suitabilityScore);
 
-      const rect = drawRect(parentNode, 50, 20, TASK_BORDER_RADIUS, color);
+      const rect = drawRect(parentNode, 100, 20, TASK_BORDER_RADIUS, color);
 
       svgAttr(rect, {
-        transform: 'translate(-20, -10)'
+        transform: "translate(0, -30)",
       });
 
-      var text = svgCreate('text');
+      var text = svgCreate("text");
 
       svgAttr(text, {
-        fill: '#fff',
-        transform: 'translate(-15, 5)'
+        fill: "#000",
+        transform: "translate(20, -15)",
       });
 
-      svgClasses(text).add('djs-label');
+      svgClasses(text).add("djs-label");
 
       svgAppend(text, document.createTextNode(suitabilityScore));
 
@@ -70,7 +63,7 @@ export default class CustomRenderer extends BaseRenderer {
   }
 
   getShapePath(shape) {
-    if (is(shape, 'bpmn:Task')) {
+    if (is(shape, "bpmn:Task")) {
       return getRoundRectPath(shape, TASK_BORDER_RADIUS);
     }
 
@@ -82,7 +75,7 @@ export default class CustomRenderer extends BaseRenderer {
 
     const { suitable } = businessObject;
 
-    return Number.isFinite(suitable) ? suitable : null;
+    return suitable;
   }
 
   getColor(suitabilityScore) {
@@ -96,13 +89,13 @@ export default class CustomRenderer extends BaseRenderer {
   }
 }
 
-CustomRenderer.$inject = [ 'eventBus', 'bpmnRenderer' ];
+CustomRenderer.$inject = ["eventBus", "bpmnRenderer"];
 
 // helpers //////////
 
 // copied from https://github.com/bpmn-io/bpmn-js/blob/master/lib/draw/BpmnRenderer.js
 function drawRect(parentNode, width, height, borderRadius, color) {
-  const rect = svgCreate('rect');
+  const rect = svgCreate("rect");
 
   svgAttr(rect, {
     width: width,
@@ -111,7 +104,7 @@ function drawRect(parentNode, width, height, borderRadius, color) {
     ry: borderRadius,
     stroke: color,
     strokeWidth: 2,
-    fill: color
+    fill: color,
   });
 
   svgAppend(parentNode, rect);
